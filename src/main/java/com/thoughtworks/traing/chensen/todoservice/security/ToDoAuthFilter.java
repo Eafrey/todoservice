@@ -26,27 +26,28 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static com.sun.scenario.Settings.set;
 
 @Component
 public class ToDoAuthFilter extends OncePerRequestFilter {
 
-    private static final byte[] SECRET_KEY = "kitty".getBytes(Charset.defaultCharset());
+//    private static final byte[] SECRET_KEY = "kitty".getBytes(Charset.defaultCharset());
 
     @Autowired
     private UserClient userClient;
-
-    public static String generateToken(int id) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("id", id);
-
-        String token = Jwts.builder()
-                .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                .compact();
-        return token;
-    }
+//
+//    public static String generateToken(int id) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("id", id);
+//
+//        String token = Jwts.builder()
+//                .addClaims(claims)
+//                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+//                .compact();
+//        return token;
+//    }
 
 
     @Override
@@ -71,10 +72,14 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
                                 ImmutableList.of(new SimpleGrantedAuthority("admin"),
                                         new SimpleGrantedAuthority("role")))
                 );
-                filterChain.doFilter(request, response);
+//                }
             } catch (Exception e) {
+            } finally {
                 filterChain.doFilter(request, response);
             }
+
+        } else {
+            filterChain.doFilter(request, response);
         }
 
 
