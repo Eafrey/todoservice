@@ -53,7 +53,7 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
 //                ResponseEntity<User> userResponse = restTemplate.postForEntity(userResourceUrl, token, User.class);
 //                User userResponseBody = userResponse.getBody();
             try {
-                User user = userClient.verifyToken(token);
+                User user = userClient.verifyTokenInternal(token);
 
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(user.getId(), null,
