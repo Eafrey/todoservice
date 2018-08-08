@@ -1,6 +1,7 @@
 package com.thoughtworks.traing.chensen.todoservice.security;
 
 import com.google.common.collect.ImmutableList;
+import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@lombok.extern.slf4j.Slf4j
 @Component
 public class ToDoAuthFilter extends OncePerRequestFilter {
 
@@ -23,6 +25,8 @@ public class ToDoAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        log.info("incoming request {}", request.getServletPath());
+
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
             try {
