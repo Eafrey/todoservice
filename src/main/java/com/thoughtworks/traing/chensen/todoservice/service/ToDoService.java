@@ -17,11 +17,19 @@ public class ToDoService {
     @Autowired
     private ToDoRepository toDoRepository;
 
+    @Autowired
+    private SpellChecker spellChecker;
+
 
     public List<Todo> getToDos() throws IOException {
-//        SecurityContextHolder.getContext();
         int id = (int) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return toDoRepository.findTodoInfosByCreateByIs(id);
+
+
+//        int id = (int) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        List<Todo> todos = toDoRepository.findTodoInfosByCreateByIs(id);
+//        spellChecker.check(todos, Todo::getContent, Todo::setSuggestion);
+//        return todos;
     }
 
     @Transactional
