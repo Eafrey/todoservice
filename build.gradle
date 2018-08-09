@@ -34,6 +34,8 @@ ext {
 dependencies {
     runtime('com.h2database:h2')
     compile('org.springframework.cloud:spring-cloud-starter-feign')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -48,6 +50,7 @@ dependencies {
     compile 'com.google.guava:guava:25.1-jre'
     compile 'org.json:json:20160810'
     compile 'org.languagetool:language-en:4.2'
+    compile('org.springframework.retry:spring-retry')
 //    compile('org.springframework.boot:spring-boot-starter-actuator')
 //    compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
 }

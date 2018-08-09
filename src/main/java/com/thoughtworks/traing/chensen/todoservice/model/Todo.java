@@ -53,6 +53,5 @@ public class Todo {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int createBy;
 
-
     private String suggestion;
 }

@@ -18,16 +18,13 @@ public class ToDoService {
     private ToDoRepository toDoRepository;
 
     @Autowired
-    private SpellChecker spellChecker;
+    private SpellCheckService spellCheckService;
 
 
     public List<Todo> getToDos() throws IOException {
         int id = (int) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return toDoRepository.findTodoInfosByCreateByIs(id);
-
-
-//        int id = (int) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Todo> todos = toDoRepository.findTodoInfosByCreateByIs(id);
+        List<Todo> todos = toDoRepository.findTodoInfosByCreateByIs(id);
+        return spellCheckService.check(todos);
 //        spellChecker.check(todos, Todo::getContent, Todo::setSuggestion);
 //        return todos;
     }
